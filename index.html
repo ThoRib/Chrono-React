@@ -42,51 +42,40 @@
 
     <script type="text/babel">
 
-
       class Compteur extends React.Component {
-        
+
         constructor(props) {
           super(props);
-          this.state = { min:0, sec:0, etat:false }
-            
+          this.state = { min:0, sec:0 }
+        }
+        
+        count(x) {
+          if(x.sec < 60) {
+              let min = x.min;
+              let sec = x.sec + 1;
+              let temps = [min, sec];
+              return temps;
+          } else {
+              let min = x.min+1;
+              let sec = 0;
+              let temps = [min, sec];
+              return temps;
+          }
+        }
+
+        go() {
           this.timer = setInterval(()=>{
             let moreTime = this.count(this.state);
             this.setState({ min:moreTime[0], sec:moreTime[1] })
           }, 1000);
-
-        }
-        
-        count(x) {
-            while (x.etat) {
-                if(x.sec < 60) {
-                    let min = x.min;
-                    let sec = x.sec + 1;
-                    let temps = [min, sec];
-                    return temps;
-                } else {
-                    let min = x.min+1;
-                    let sec = 0;
-                    let temps = [min, sec];
-                    return temps;
-                }
-            }
-            let min = x.min;
-            let sec = x.sec;
-            let temps = [min, sec];
-            return temps;
         }
 
         stop() {
-            this.setState({ etat:false });
-        }
-
-        go() {
-            this.setState({ etat:true });
+          clearInterval(this.timer);
         }
 
         zero() {
-            this.setState({ sec:0 });
-            this.setState({ min:0 });
+            this.setState({ min:0, sec:0 });
         }
         
         render() {
