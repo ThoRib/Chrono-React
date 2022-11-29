@@ -43,12 +43,19 @@
             let resultat = x.sec + 1;
             return resultat;
           }
-          clearInterval(this.timer);
-          return x.sec;
+            return x.sec;
         }
 
         stop() {
             this.setState({ etat:false });
+        }
+
+        go() {
+            this.setState({ etat:true });
+        }
+
+        zero() {
+            this.setState({ sec:0 });
         }
         
         render() {
@@ -56,6 +63,8 @@
             <div>
                 <div className="here">{this.state.sec}</div>
                 <button onClick={this.stop.bind(this)} >Stop</button>
+                <button onClick={this.go.bind(this)} >Go</button>
+                <button onClick={this.zero.bind(this)} >Zero</button>
             </div>
           )
         }
