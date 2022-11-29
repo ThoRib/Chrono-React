@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style type="text/css">
+      .here {
+        background-color: greenyellow;
+        font-weight: bold;
+        font-size: 3rem;
+        padding: 50px;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+
+      class Compteur extends React.Component {
+        
+        constructor(props) {
+          super(props);
+          this.state = { sec:0, etat:true }
+            
+          this.timer = setInterval(()=>{
+            let secMore = this.count(this.state);
+            this.setState({ sec:secMore })
+          }, 1000);
+
+        }
+        
+        count(x) {
+          while (x.etat) {
+            let resultat = x.sec + 1;
+            return resultat;
+          }
+          clearInterval(this.timer);
+          return x.sec;
+        }
+
+        stop() {
+            this.setState({ etat:false });
+        }
+        
+        render() {
+          return (
+            <div>
+                <div className="here">{this.state.sec}</div>
+                <button onClick={this.stop.bind(this)} >Stop</button>
+            </div>
+          )
+        }
+      }
+
+      // Méthode recommandée en react 18
+      const container = document.getElementById("app");
+      const app = ReactDOM.createRoot(container);
+      app.render(<Compteur/>);
+
+    </script>
+    
+
+  </body>
+</html>
