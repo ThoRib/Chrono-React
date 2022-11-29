@@ -10,11 +10,29 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style type="text/css">
-      .here {
-        background-color: greenyellow;
+        body {
+            background-color: #8f7fff;
+        }
+      .chrono {
+        background-color: #2fe2ff;
         font-weight: bold;
         font-size: 3rem;
         padding: 50px;
+        text-align: center;
+      }
+      .boutons {
+        text-align: center;
+      }
+      button {
+        font-size: 1.5rem;
+        margin: 15px 5px;
+        padding: 5px;
+        background-color: #2fe2ff;
+        border: none;
+        border-radius: 5px;
+      }
+      button:hover {
+        cursor: pointer;
       }
     </style>
 
@@ -74,10 +92,12 @@
         render() {
           return (
             <div>
-                <div className="here">{this.state.min} : {this.state.sec}</div>
-                <button onClick={this.stop.bind(this)} >Stop</button>
-                <button onClick={this.go.bind(this)} >Go</button>
-                <button onClick={this.zero.bind(this)} >Zero</button>
+                <div className="chrono">{this.state.min} : {this.state.sec}</div>
+                <div className="boutons">
+                    <button onClick={this.go.bind(this)} >Go</button>
+                    <button onClick={this.stop.bind(this)} >Stop</button>
+                    <button onClick={this.zero.bind(this)} >Zero</button>
+                </div>
             </div>
           )
         }
