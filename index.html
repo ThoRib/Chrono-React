@@ -29,21 +29,27 @@
         
         constructor(props) {
           super(props);
-          this.state = { sec:0, etat:true }
+          this.state = { min:0, sec:0, etat:true }
             
           this.timer = setInterval(()=>{
-            let secMore = this.count(this.state);
-            this.setState({ sec:secMore })
+            let moreTime = this.count(this.state);
+            this.setState({ min:moreTime[0], sec:moreTime[1] })
           }, 1000);
 
         }
         
         count(x) {
+            
           while (x.etat) {
-            let resultat = x.sec + 1;
-            return resultat;
+            let min = x.min + 1;
+            let sec = x.sec + 1;
+            let temps = [min, sec];
+            return temps;
           }
-            return x.sec;
+            let min = x.min;
+            let sec = x.sec;
+            let temps = [min, sec];
+            return temps;
         }
 
         stop() {
@@ -61,7 +67,7 @@
         render() {
           return (
             <div>
-                <div className="here">{this.state.sec}</div>
+                <div className="here">{this.state.min} : {this.state.sec}</div>
                 <button onClick={this.stop.bind(this)} >Stop</button>
                 <button onClick={this.go.bind(this)} >Go</button>
                 <button onClick={this.zero.bind(this)} >Zero</button>
